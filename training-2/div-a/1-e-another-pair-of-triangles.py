@@ -16,23 +16,18 @@ class Triangle:
     @staticmethod
     def _maximize_square(p: int) -> (bool, 'Triangle'):
         one_third = math.floor(p / 3)
-        a = one_third
-        while a < p - one_third + 1:
-            b_plus_c = p - a
-            b = int(b_plus_c / 2) if b_plus_c % 2 == 0 else math.floor(b_plus_c / 2)
-            c = b_plus_c - b
-            t = Triangle(a, b, c)
+        for a in range(one_third, p - one_third + 1):
+            b = int((p - a) / 2)
+            t = Triangle(a, b, p - a - b)
             if t.is_triangle(t.a, t.b, t.c):
                 return True, t
-            a += 1
         return False, None
 
     @staticmethod
     def _minimize_square(p: int) -> (bool, 'Triangle'):
         for a in range(1, math.ceil(p / 3) + 1):
             b = int((p - a) / 2)
-            c = p - a - b
-            t = Triangle(a, b, c)
+            t = Triangle(a, b, p - a - b)
             if Triangle.is_triangle(t.a, t.b, t.c):
                 return True, t
         return False, None
