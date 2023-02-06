@@ -11,31 +11,11 @@ class Triangle:
     def __repr__(self) -> str:
         return f'Triangle({self.a},{self.b},{self.c})'
 
-    def square_squared(self) -> (bool, float):
-        if self.s_squared is not None:
-            return True, self.s_squared
-        if not Triangle.is_triangle(self.a, self.b, self.c):
-            return False, None
-        half_p = (self.a + self.b + self.c) / 2
-        self.s_squared = half_p * \
-                         (half_p - self.a) * \
-                         (half_p - self.b) * \
-                         (half_p - self.c)
-        return True, self.s_squared
-
     @staticmethod
     def is_triangle(a, b, c) -> bool:
         return a + b > c \
             and a + c > b \
             and b + c > a
-
-    @staticmethod
-    def _minimize_b(p: int, a: int) -> (bool, 'Triangle'):
-        for b in range(1, p - a):
-            t = Triangle(a, b, p - a - b)
-            if Triangle.is_triangle(t.a, t.b, t.c):
-                return True, t
-        return False, None
 
     @staticmethod
     def _maximize_square(p: int) -> (bool, 'Triangle'):
