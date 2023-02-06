@@ -6,10 +6,6 @@ class Triangle:
         self.a = a
         self.b = b
         self.c = c
-        self.s_squared = None
-
-    def __repr__(self) -> str:
-        return f'Triangle({self.a},{self.b},{self.c})'
 
     @staticmethod
     def is_triangle(a, b, c) -> bool:
